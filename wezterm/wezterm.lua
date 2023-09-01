@@ -11,25 +11,16 @@ end
 config.max_fps = 144
 config.front_end = "OpenGL"
 for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
-  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    if gpu.backend == "Dx12" and gpu.device_type == "DiscreteGpu" then
-      config.webgpu_preferred_adapter = gpu
-      config.webgpu_power_preference = "HighPerformance"
-      config.front_end = "WebGpu"
-      break
-    end
-  else
-    if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
-      config.webgpu_preferred_adapter = gpu
-      config.webgpu_power_preference = "HighPerformance"
-      config.front_end = "WebGpu"
-      break
-    end
+  if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
+    config.webgpu_preferred_adapter = gpu
+    config.webgpu_power_preference = "HighPerformance"
+    config.front_end = "WebGpu"
+    break
   end
 end
 config.color_scheme = "Catppuccin Frappe"
 config.default_prog = { "nu" }
-config.font = wezterm.font("Iosevka NFM")
+config.font = wezterm.font("Iosevka Nerd Font")
 config.font_size = 13
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
